@@ -3,7 +3,7 @@ import { inject, injectable } from 'inversify';
 import { setTimeout } from 'node:timers/promises';
 
 import { DatabaseClient } from './database-client.interface.js';
-import { Component } from '../../types/index.js';
+import { Component } from '../../../types/component.enum.js';
 import { Logger } from '../logger/index.js';
 
 const RETRY_COUNT = 5;

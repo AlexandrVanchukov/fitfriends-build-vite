@@ -1,9 +1,9 @@
-import { Command } from './commands.interface.js';
-import { MockWorkoutData } from '../../shared/types/index.js';
+import { Command } from './command.interface.js';
+import { MockWorkoutData } from '../../types/mock-workout-data.type.js';
 import got from 'got';
 import { TSVWorkoutGenerator } from '../../shared/libs/workout-generator/index.js';
-import { getErrorMessage } from '../../src/shared/helpers/common.js';
-import { TSVFileWriter } from '../../src/shared/libs/file-writer/tsv-file-writer.js';
+import { getErrorMessage } from '../../shared/helpers/common.js';
+import { TSVFileWriter } from '../../shared/libs/file-writer/tsv-file-writer.js';
 
 export class GenerateCommand implements Command {
   private initialData: MockWorkoutData;

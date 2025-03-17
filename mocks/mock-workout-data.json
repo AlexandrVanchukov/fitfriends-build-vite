@@ -30,8 +30,8 @@
         "50-80 мин",
         "80-100 мин"
       ],
-      "prices": [0, 1000, 1500, 2000],
-      "calories": [1000, 2000, 3000, 4000],
+      "prices": ["0", "1000", "1500", "2000"],
+      "calories": ["1000", "2000", "3000", "4000"],
       "descriptions": [
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
@@ -46,13 +46,14 @@
         "https://video-preview.s3.yandex.net/VCczTwIAAAA.mp4",
         "https://video-preview.s3.yandex.net/zecPPAIAAAA.mp4"
       ],
-      "ratings": [3.8, 4, 4.56, 4,999999],
-      "coachIds": [
-        "124",
-        "1efw34",
-        "12efvsgesr4"
+      "ratings": ["3.8", "4", "4.56", "4.999999"],
+      "coachNames": [
+        "Максим",
+        "Ольга",
+        "Андрей",
+        "Татьяна"
       ],
-      "isSpecials": [true, false]
+      "isSpecials": ["true", "false"]
     }
   }
   

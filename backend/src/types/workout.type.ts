@@ -17,6 +17,6 @@ export type Workout = {
     sex: WorkoutSex;
     video: string;
     rating: number;
-    coachId: string;
+    coachName: string;
     isSpecial: boolean;
 };

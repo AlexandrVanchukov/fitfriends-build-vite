@@ -2,10 +2,7 @@ import EventEmitter from 'node:events';
 import { createReadStream } from 'node:fs';
 
 import { FileReader } from './file-reader.interface.js';
-import { Offer, OfferType, City, Goods, User } from '../../types/index.js';
-
-const DEFAULT_ZOOM = 9;
-
+import { Workout, WorkoutDuration, WorkoutLevel, WorkoutSex, WorkoutType } from '../../../types/index.js';
 export class TSVFileReader extends EventEmitter implements FileReader {
   private CHUNK_SIZE = 16384; // 16KB
 
@@ -15,85 +12,56 @@ export class TSVFileReader extends EventEmitter implements FileReader {
     super();
   }
 
-  private parseLineToOffer(line: string): Offer {
+  private parseLineToWorkout(line: string): Workout {
     const [
       id,
       title,
-      description,
-      createdDate,
-      city,
-      previewImage,
-      images,
-      isPremium,
-      isFavorite,
-      rating,
+      backgroundImage,
+      level,
       type,
-      bedrooms,
-      maxAdults,
+      duration,
       price,
-      goods,
-      hostId,
-      comments,
-      lat,
-      lon,
+      calories,
+      description,
+      sex,
+      video,
+      rating,
+      coachName,
+      isSpecial
     ] = line.split('\t');
 
     return {
       id,
       title,
-      description,
-      createdDate: new Date(createdDate),
-      city: city as City,
-      previewImage,
-      images: this.parseStringsSplitBySemicolon(images),
-      isPremium: this.parseBoolean(isPremium),
-      isFavorite: this.parseBoolean(isFavorite),
-      rating: this.parseFloat(rating),
-      type: type as OfferType,
-      bedrooms: this.parseInt(bedrooms),
-      maxAdults: this.parseInt(maxAdults),
+      backgroundImage,
+      level: this.parseType<WorkoutLevel>(level),
+      type: this.parseType<WorkoutType>(type),
+      duration: this.parseType<WorkoutDuration>(duration),
       price: this.parseInt(price),
-      goods: this.parseGoods(goods),
-      hostId: this.parseHostId(hostId),
-      comments: this.parseInt(comments),
-      location: {
-        latitude: this.parseFloat(lat),
-        longitude: this.parseFloat(lon),
-        zoom: DEFAULT_ZOOM
-      }
+      calories: this.parseInt(calories),
+      description,
+      sex: this.parseType<WorkoutSex>(sex),
+      video,
+      rating: this.parseFloat(rating),
+      coachName,
+      isSpecial: this.parseBoolean(isSpecial)
     };
-  }
-
-  private parseHostId(hostId: string): User {
-    return {
-      id: hostId,
-      name: 'default_name',
-      email: 'default_email',
-      avatarUrl: '',
-      password: 'default',
-      type: 'default'
-
-    };
-  }
-
-  private parseStringsSplitBySemicolon(parseString: string): string[] {
-    return parseString.split(';');
-  }
-
-  private parseGoods(goodsString: string): Goods[] {
-    return goodsString.split(';') as Goods[];
   }
 
   private parseBoolean(booleanString: string): boolean {
     return booleanString.toLowerCase() === 'true';
   }
 
-  private parseInt(priceString: string): number {
-    return Number.parseInt(priceString, 10);
+  private parseInt(intString: string): number {
+    return Number.parseInt(intString, 10);
   }
 
-  private parseFloat(priceString: string): number {
-    return Number.parseFloat(priceString);
+  private parseFloat(floatString: string): number {
+    return Number.parseFloat(floatString);
+  }
+
+  private parseType<T>(parseString: string): T {
+    return parseString as T;
   }
 
   public async read(): Promise<void> {
@@ -114,7 +82,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
         remainingData = remainingData.slice(++nextLinePosition);
         importedRowCount++;
 
-        const parsedOffer = this.parseLineToOffer(completeRow);
+        const parsedOffer = this.parseLineToWorkout(completeRow);
         await new Promise((resolve) => {
           this.emit('line', parsedOffer, resolve);
         });

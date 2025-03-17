@@ -1,18 +1,15 @@
-import { WorkoutDuration, WorkoutLevel, WorkoutSex, WorkoutType } from './workout.type.js';
-
-
 export type MockWorkoutData = {
     titles: string[];
     backgroundImages: string[];
-    levels: WorkoutLevel[];
-    types: WorkoutType[];
-    durations: WorkoutDuration[];
-    prices: number[];
-    calories: number[];
+    levels: string[];
+    types: string[];
+    durations: string[];
+    prices: string[];
+    calories: string[];
     descriptions: string[];
-    sex: WorkoutSex[];
+    sex: string[];
     videos: string[];
-    ratings: number[];
-    coachIds: string[];
-    isSpecials: boolean[];
+    ratings: string[];
+    coachNames: string[];
+    isSpecials: string[];
 };
